@@ -36,6 +36,9 @@ import com.example.pnlib.model.Sach;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -96,7 +99,7 @@ public class fragment_sach extends Fragment {
     }
 
     void capNhatLv() {
-        list = (ArrayList<Sach>) sachDAO.getAllASC();
+        list = (ArrayList<Sach>) sachDAO.getAll();
         tempList = sachDAO.getAll();
         adapter = new SachAdapter(getActivity(), this, list);
         lvSach.setAdapter(adapter);
@@ -241,12 +244,13 @@ public class fragment_sach extends Fragment {
         inflater.inflate(R.menu.menu_tim,menu);
 
         MenuItem menuItem = menu.findItem(R.id.search);
+        MenuItem len = menu.findItem(R.id.len);
+        MenuItem xuong = menu.findItem(R.id.xuong);
         SearchView searchView = (SearchView) menuItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                return false;
             }
 
@@ -262,9 +266,33 @@ public class fragment_sach extends Fragment {
                 return false;
             }
         });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.len){
+            Collections.sort(list, new Comparator<Sach>() {
+                @Override
+                public int compare(Sach o1, Sach o2) {
+                    return o1.getTenSach().compareTo(o2.getTenSach());
+                }
+            });
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+        else if(id == R.id.xuong){
+            Collections.sort(list, new Comparator<Sach>() {
+                @Override
+                public int compare(Sach o1, Sach o2) {
+                    return o2.getTenSach().compareTo(o1.getTenSach());
+                }
+            });
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

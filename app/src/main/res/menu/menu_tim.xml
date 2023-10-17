@@ -6,4 +6,10 @@
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
+    <item android:id="@+id/len" android:title="Tăng"
+        android:icon="@drawable/len"
+        app:showAsAction="always"/>
+    <item android:id="@+id/xuong" android:title="Tăng"
+        android:icon="@drawable/xuong"
+        app:showAsAction="always"/>
 </menu>

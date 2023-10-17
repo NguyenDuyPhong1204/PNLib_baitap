@@ -49,12 +49,12 @@ public class SachDAO {
     }
 
     public List<Sach> getAllASC(){
-        String sql = "SELECT * FROM Sach ORDER BY giaThue ASC";
+        String sql = "SELECT * FROM Sach ORDER BY tenSach ASC";
         return getData(sql);
     }
 
     public List<Sach> getAllDESC(){
-        String sql = "SELECT * FROM Sach ORDER BY giaThue DESC";
+        String sql = "SELECT * FROM Sach ORDER BY tenSach DESC";
         return getData(sql);
     }
 
